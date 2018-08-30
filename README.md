@@ -13,12 +13,33 @@ Makesure Dockerfile is in same directtory as requirements.txt.
 
 ```
 docker build -t <env name> .
-docker run -it <env name>
-docker run -it -v "$(pwd)"/:/app <env name>
 
 eric@ubuntu:~/Desktop/djangoagent$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-djangoagent         latest              29731fc1ef0a        22 hours ago        552MB
+<env name>          latest              29731fc1ef0a        22 hours ago        552MB
 debian              latest              3bbb526d2608        6 weeks ago         101MB
-hello-world         latest              2cb0d9787c4d        7 weeks ago         1.85kB
+
+docker run -it -v "$(pwd)"/:/app <env name>
+
+eric@ubuntu:~/Desktop/djangoagent$ docker container ls -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+919bf5e984ca        <env name>         "bash"              8 seconds ago       Exited (0) 3 seconds ago                   agitated_agnesi
 ```
+
+## Helpfull Docker commands
+
+https://docs.docker.com/engine/reference/commandline/docker/
+
+### Containers
+
+```
+docker container ls -a
+docker container prune
+```
+
+### Images
+
+```
+docker images
+```
+
