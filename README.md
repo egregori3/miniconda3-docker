@@ -9,6 +9,7 @@ Dockerfile for Miniconda3 based Python development
 
 Copy Dockerfile into your Python project directory.
 Your project directory will appear in docker image /app directory.
+Makesure Dockerfile is in same directtory as requirements.txt.
 
 ```
 docker build -t <env name> .
