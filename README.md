@@ -43,3 +43,55 @@ docker container prune
 docker images
 ```
 
+## To build and start container
+
+On host machine
+```
+docker build -t djangotrainer .
+docker run -it -v "$(pwd)"/:/app djangotrainer
+
+eric@ubuntu:~/Desktop/djangotrainer/mysite/djangotrainer$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+9ff1925c4662        djangotrainer       "bash"              15 hours ago        Up 15 hours                             keen_shockley
+
+
+docker inspect 9ff1925c4662
+
+...
+"IPAddress": "172.17.0.2",
+...
+
+To restart container
+docker start -a -i `docker ps -q -l`
+
+```
+
+## Init django using container virtual environment 
+
+In the container
+
+```
+cd app
+django-admin startproject mysite
+python manage.py startapp djangotrainer
+
+(base) root@9ff1925c4662:/app/mysite# python manage.py startapp djangotrainer
+(base) root@9ff1925c4662:/app/mysite# ls
+djangotrainer  manage.py  mysite
+
+python manage.py migrate
+```
+
+## Run the server 
+
+In the container
+
+```
+python manage.py runserver 0.0.0.0:8000 
+```
+
+## On host
+
+```
+http://172.17.0.2:8000/
+```
